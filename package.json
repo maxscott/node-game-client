@@ -1,0 +1,22 @@
+{
+  "name": "warbler",
+  "version": "1.0.0",
+  "description": "warbling its way into the hearts and minds of the american people",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/maxwerr/warbler.git"
+  },
+  "author": "maxwerr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maxwerr/warbler/issues"
+  },
+  "homepage": "https://github.com/maxwerr/warbler#readme",
+  "dependencies": {
+    "express": "^4.13.1"
+  }
+}
