@@ -1,5 +1,6 @@
 var drawRegularPolygon = require('util').drawRegularPolygon;
 var Warbler = require('./Warbler');
+var colors = require('./colors');
 
 function outsideCanvas (thing, canvas) {
   return thing.x > canvas.width + 20 || thing.x < -20 ||
@@ -7,12 +8,12 @@ function outsideCanvas (thing, canvas) {
 }
 
 function initialize (canvas, ctx, window) {
-  canvas.style.backgroundColor = 'rgb(120, 200, 200)';
+  canvas.style.backgroundColor = colors.background;
   canvas.width = 800;
   canvas.height = 600;
 
-  var p1 = new Warbler(50, 50, 30, 'pink', 'rgb(200, 100, 100)');
-  var p2 = new Warbler(200, 200, 30, 'bisque', 'rgb(200, 200, 100)');
+  var p1 = new Warbler(50, 50, 30, colors.player1.border, colors.player1.main);
+  var p2 = new Warbler(200, 200, 30, colors.player2.border, colors.player2.main);
 
   p1.init(canvas, window);
 

@@ -16,22 +16,20 @@ function generatePoints (x, y, sides, radius, offset) {
 function drawRegularPolygon (context, x, y, sides, radius, offset, fill, fillColor, stroke, strokeColor, strokeWidth){
   var vertices = generatePoints(x,y,sides,radius,offset);
   context.beginPath(vertices[0][0], vertices[0][1]);
-  for (var i = 0; i < vertices.length; i++){
+  for (var i = 0; i < vertices.length; i++) {
     context.lineTo(vertices[i][0],vertices[i][1]);
   }
   context.lineTo(vertices[0][0], vertices[0][1]);
   context.closePath();
-  if(fill == true)
-    {
-      context.fillStyle = fillColor;
-      context.fill();
-    }
-    if (stroke == true)
-      {
-        context.strokeStyle = strokeColor;
-        context.lineWidth = strokeWidth;
-        context.stroke();
-      }
+  if (fill === true) {
+    context.fillStyle = fillColor;
+    context.fill();
+  }
+  if (stroke === true) {
+    context.strokeStyle = strokeColor;
+    context.lineWidth = strokeWidth;
+    context.stroke();
+  }
 }
 
 exports.drawRegularPolygon = drawRegularPolygon;

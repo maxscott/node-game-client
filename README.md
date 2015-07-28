@@ -1,8 +1,9 @@
 # things working
 - arrow keys
-- space bar
+- click shoot
 - pointing
 
 # things not working
-- shooting direction...
 - everything else
+- anything that would make this fun
+- the part where it's cool

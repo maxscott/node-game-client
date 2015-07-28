@@ -25,7 +25,8 @@ Warbler.prototype.update = function (dt, bullets) {
   if (this.keys["Right"]) this.x += adjSpeed;
   if (this.keys["Up"])    this.y -= adjSpeed;
   if (this.keys["Down"])  this.y += adjSpeed;
-  if (this.keys["U+0020"] && this.bulletDelay < 0) {
+
+  if (this.keys["click"] && this.bulletDelay < 0) {
     bullets.push(new Bullet(this));
     this.bulletDelay = 120;
   }
@@ -37,6 +38,12 @@ Warbler.prototype.init = function (canvas, window) {
   canvas.addEventListener('mousemove', function(ev) {
     self.pointedX = ev.x;
     self.pointedY = ev.y;
+  });
+  canvas.addEventListener('mousedown', function(ev) {
+    self.keys['click'] = true;
+  });
+  canvas.addEventListener('mouseup', function(ev) {
+    self.keys['click'] = false;
   });
 
   window.addEventListener('keydown', function(ev) {
