@@ -30,6 +30,11 @@ Warbler.prototype.update = function (dt, bullets) {
     bullets.push(new Bullet(this));
     this.bulletDelay = 120;
   }
+
+  var dx = this.pointedX - this.x;
+  var dy = this.pointedY - this.y;
+  var h = Math.sqrt(dx*dx + dy*dy);
+  this.offset = (Math.acos(dy / h) || 0) * (dx < 0 ? -1 : 1);
 }
 
 Warbler.prototype.init = function (canvas, window) {

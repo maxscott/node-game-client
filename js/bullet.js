@@ -5,13 +5,15 @@ var Bullet = function Bullet (warbler) {
   this.speed = 930;
   this.color = warbler.color2;
   this.color2 = warbler.color;
+  this.color = "purple";
+  this.color2 = "purple";
   this.offset = Math.random();
   var dx = warbler.pointedX - warbler.x;
   var dy = warbler.pointedY - warbler.y;
   var h = Math.sqrt(dx*dx + dy*dy);
   this.angleOfShot = Math.acos(dy / h) * (dx < 0 ? -1 : 1);
-  this.x = warbler.x + (Math.sin(this.angleOfShot) * warbler.radius) + 10;
-  this.y = warbler.y + (Math.cos(this.angleOfShot) * warbler.radius) + 10;
+  this.x = warbler.x + (Math.sin(this.angleOfShot) * (warbler.radius + this.radius));
+  this.y = warbler.y + (Math.cos(this.angleOfShot) * (warbler.radius + this.radius));
 }
 
 Bullet.prototype.update = function update (dt) {
