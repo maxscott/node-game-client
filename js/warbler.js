@@ -9,7 +9,7 @@ var Warbler = function Warbler (x, y, radius, color, color2) {
   this.color = color;
   this.color2 = color2;
   this.keys = [];
-  this.speed = 120;
+  this.speed = 170;
   this.bulletDelay = 0;
 }
 
@@ -27,15 +27,11 @@ Warbler.prototype.update = function (dt, bullets) {
   if (this.keys["Down"])  this.y += adjSpeed;
   if (this.keys["U+0020"] && this.bulletDelay < 0) {
     bullets.push(new Bullet(this));
-    this.bulletDelay = 200;
+    this.bulletDelay = 120;
   }
 }
 
 Warbler.prototype.init = function (canvas, window) {
-  canvas.style.backgroundColor = 'rgb(120, 200, 200)';
-  canvas.width = 500;
-  canvas.height = 400;
-
   var self = this;
 
   canvas.addEventListener('mousemove', function(ev) {

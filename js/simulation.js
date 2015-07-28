@@ -7,6 +7,10 @@ function outsideCanvas (thing, canvas) {
 }
 
 function initialize (canvas, ctx, window) {
+  canvas.style.backgroundColor = 'rgb(120, 200, 200)';
+  canvas.width = 800;
+  canvas.height = 600;
+
   var p1 = new Warbler(50, 50, 30, 'pink', 'rgb(200, 100, 100)');
   var p2 = new Warbler(200, 200, 30, 'bisque', 'rgb(200, 200, 100)');
 
@@ -30,7 +34,6 @@ function initialize (canvas, ctx, window) {
 
       if (outsideCanvas(gameObjs[i], canvas)) {
         gameObjs.splice(i, 1);
-        console.log(gameObjs.length);
       }
     }
     lastTime = now;
