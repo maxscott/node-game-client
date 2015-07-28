@@ -7,22 +7,38 @@ function outsideCanvas (thing, canvas) {
     thing.y > canvas.height + 20 || thing.y < -20;
 }
 
-function initialize (canvas, ctx, window) {
+function initialize (canvas, ctx, window, io) {
   canvas.style.backgroundColor = colors.background;
   canvas.width = 800;
   canvas.height = 600;
 
   var p1 = new Warbler(50, 50, 30, colors.player1.border, colors.player1.main);
-  var p2 = new Warbler(200, 200, 30, colors.player2.border, colors.player2.main);
+
+  io.on('joined', function (message) {
+    if (message.who === io.id) return;
+
+    var randColors = new Array(6);
+    for (var i in randColors) {
+      randColors[i] = Math.round(Math.random()*255);
+    }
+    i = 0;
+
+    var newPlayer = new Warbler(200, 200, 30,
+      'rgba(' + randColors[i++] + ', ' + randColors[i++] + ', ' + randColors[i++] + ', .4)',
+      'rgba(10, 180, 10, .8)');
+
+    newPlayer.id = message.who;
+    gameObjs.push(newPlayer);
+  });
 
   p1.init(canvas, window);
 
-  var gameObjs = [ p1, p2 ];
+  var gameObjs = [ p1 ];
   var lastTime = Date.now();
 
   requestAnimationFrame(function main() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     for (var i in gameObjs) {
       gameObjs[i].render(ctx);
     }

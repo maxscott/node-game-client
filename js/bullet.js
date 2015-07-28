@@ -3,6 +3,7 @@ var drawRegularPolygon = require('util').drawRegularPolygon;
 var Bullet = function Bullet (warbler) {
   this.radius = 10;
   this.speed = 930;
+  this.owner = warbler;
   this.color = warbler.color2;
   this.color2 = warbler.color;
   this.color = "purple";
