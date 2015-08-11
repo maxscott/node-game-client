@@ -1,5 +1,5 @@
-var drawRegularPolygon = require('util').drawRegularPolygon;
-var Warbler = require('./Warbler');
+var drawRegularPolygon = require('shared/util').drawRegularPolygon;
+var Warbler = require('shared/Warbler');
 var colors = require('./colors');
 
 function outsideCanvas (thing, canvas) {
