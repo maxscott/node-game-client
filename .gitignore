@@ -30,4 +30,4 @@ build/Release
 node_modules
 
 # allowing local dev of git submodule
-# js/shared
+js/shared
