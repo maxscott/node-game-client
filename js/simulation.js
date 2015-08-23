@@ -12,7 +12,13 @@ function initialize (canvas, ctx, window, io) {
   canvas.width = 800;
   canvas.height = 600;
 
-  var p1 = new Warbler(50, 50, 30, colors.player1.border, colors.player1.main);
+  var p1 = new Warbler({
+    x: 50,
+    y: 50,
+    radius: 30,
+    color: colors.player1.border,
+    color2: colors.player1.main
+  });
 
   io.on('joined', function (message) {
     if (message.who === io.id) return;
@@ -23,9 +29,13 @@ function initialize (canvas, ctx, window, io) {
     }
     i = 0;
 
-    var newPlayer = new Warbler(200, 200, 30,
-      'rgba(' + randColors[i++] + ', ' + randColors[i++] + ', ' + randColors[i++] + ', .4)',
-      'rgba(10, 180, 10, .8)');
+    var newPlayer = new Warbler({
+      x: 200,
+      y: 200,
+      radius: 30,
+      color: 'rgba(' + randColors[i++] + ', ' + randColors[i++] + ', ' + randColors[i++] + ', .4)',
+      color2: 'rgba(10, 180, 10, .8)'
+    });
 
     newPlayer.id = message.who;
     gameObjs.push(newPlayer);
