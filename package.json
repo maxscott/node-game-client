@@ -4,8 +4,9 @@
   "description": "warbling its way into the hearts and minds of the american people",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "npm test",
-    "setup-dev": "rm -rf js/shared && ln -s ../bj-shared js/shared",
+    "setup-dev": "rm -rf js/shared && ln -s ../../bj-shared js/shared",
     "setup-prod": "rm -rf js/shared && git submodule add -f git@github.com:maxwerr/bj-shared js/shared && git submodule init && git submodule update"
   },
   "repository": {
