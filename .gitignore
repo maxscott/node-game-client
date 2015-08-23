@@ -32,3 +32,4 @@ node_modules
 # allowing local dev of git submodule
 .gitmodules
 js/shared
+js/shared/
