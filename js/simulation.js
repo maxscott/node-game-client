@@ -21,24 +21,20 @@ function initialize (canvas, ctx, window, io) {
   });
 
   io.on('joined', function (message) {
-    if (message.who === io.id) return;
+    for (var i in message.players) {
+      if (i === io.id) continue;
 
-    var randColors = new Array(6);
-    for (var i in randColors) {
-      randColors[i] = Math.round(Math.random()*255);
+      var newPlayer = new Warbler({
+        x: message.players[i].x,
+        y: message.players[i].y,
+        radius: message.players[i].radius,
+        color: message.players[i].color,
+        color2: message.players[i].color2,
+      });
+
+      newPlayer.id = message.who;
+      gameObjs.push(newPlayer);
     }
-    i = 0;
-
-    var newPlayer = new Warbler({
-      x: 200,
-      y: 200,
-      radius: 30,
-      color: 'rgba(' + randColors[i++] + ', ' + randColors[i++] + ', ' + randColors[i++] + ', .4)',
-      color2: 'rgba(10, 180, 10, .8)'
-    });
-
-    newPlayer.id = message.who;
-    gameObjs.push(newPlayer);
   });
 
   p1.init(canvas, window);
