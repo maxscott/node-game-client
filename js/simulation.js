@@ -1,5 +1,5 @@
-var drawRegularPolygon = require('shared/util').drawRegularPolygon;
-var Warbler = require('shared/Warbler');
+var drawRegularPolygon = require('./shared/util').drawRegularPolygon;
+var Warbler = require('./shared/Warbler');
 var colors = require('./colors');
 
 function outsideCanvas (thing, canvas) {
@@ -9,21 +9,13 @@ function outsideCanvas (thing, canvas) {
 
 function initialize (canvas, ctx, window, io) {
   canvas.style.backgroundColor = colors.background;
-  canvas.width = 800;
-  canvas.height = 600;
+  canvas.width = 400;
+  canvas.height = 300;
 
-  var p1 = new Warbler({
-    x: 50,
-    y: 50,
-    radius: 30,
-    color: colors.player1.border,
-    color2: colors.player1.main
-  });
+  var gameObjs = [];
 
   io.on('joined', function (message) {
     for (var i in message.players) {
-      if (i === io.id) continue;
-
       var newPlayer = new Warbler({
         x: message.players[i].x,
         y: message.players[i].y,
@@ -32,14 +24,18 @@ function initialize (canvas, ctx, window, io) {
         color2: message.players[i].color2,
       });
 
-      newPlayer.id = message.who;
+      if (i === io.id) {
+        console.log('you joined us, ' + i);
+        newPlayer.init(canvas, window);
+      } else {
+        console.log('we were joined by ' + i);
+      }
+
       gameObjs.push(newPlayer);
     }
   });
 
-  p1.init(canvas, window);
 
-  var gameObjs = [ p1 ];
   var lastTime = Date.now();
 
   requestAnimationFrame(function main() {
