@@ -14,6 +14,16 @@ function initialize (canvas, ctx, window, io) {
 
   var gameObjs = [];
 
+  io.on('left', function (message) {
+    var leftArr = gameObjs.filter(function (a) {
+      return a.id === message.who;
+    });
+    if (leftArr.length > 0) {
+      var index = gameObjs.indexOf(leftArr[0]);
+      gameObjs.splice(index, 1);
+    }
+  });
+
   io.on('joined', function (message) {
     for (var i in message.players) {
       var newPlayer = new Warbler({
@@ -23,7 +33,7 @@ function initialize (canvas, ctx, window, io) {
         color: message.players[i].color,
         color2: message.players[i].color2,
       });
-
+      newPlayer.id = i;
       if (i === io.id) {
         console.log('you joined us, ' + i);
         newPlayer.init(canvas, window);
