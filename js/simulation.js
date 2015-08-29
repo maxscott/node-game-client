@@ -15,10 +15,10 @@ function initialize (canvas, ctx, window, io) {
   var gameObjs = [];
 
   io.on('left', function (message) {
-    var leftArr = gameObjs.filter(function (a) {
-      return a.id === message.who;
+    var thingsToRemove = gameObjs.filter(function (a) {
+      return a.id === message.who || a.owner.id === message.who;
     });
-    if (leftArr.length > 0) {
+    if (thingsToRemove.length > 0) {
       var index = gameObjs.indexOf(leftArr[0]);
       gameObjs.splice(index, 1);
     }
@@ -29,10 +29,7 @@ function initialize (canvas, ctx, window, io) {
       var newPlayer = new Warbler(message.players[i]);
       newPlayer.id = i;
       if (i === io.id) {
-        console.log('you joined everyone, ' + i);
         newPlayer.init(canvas, window);
-      } else {
-        console.log('you were joined by ' + i);
       }
 
       gameObjs.push(newPlayer);
