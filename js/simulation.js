@@ -51,9 +51,14 @@ function initialize (canvas, ctx, window, io) {
 
     var now = Date.now();
     var dt = now - lastTime;
+    var actionsTemp = null;
 
     for (var i in gameObjs) {
-      gameObjs[i].update(dt, gameObjs);
+      if (gameObjs[i].getCurrentActions) {
+        actionsTemp = gameObjs[i].getCurrentActions();
+      }
+
+      gameObjs[i].update(dt, gameObjs, actionsTemp);
 
       if (outsideCanvas(gameObjs[i], canvas)) {
         gameObjs.splice(i, 1);
