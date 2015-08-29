@@ -26,19 +26,13 @@ function initialize (canvas, ctx, window, io) {
 
   io.on('joined', function (message) {
     for (var i in message.players) {
-      var newPlayer = new Warbler({
-        x: message.players[i].x,
-        y: message.players[i].y,
-        radius: message.players[i].radius,
-        color: message.players[i].color,
-        color2: message.players[i].color2,
-      });
+      var newPlayer = new Warbler(message.players[i]);
       newPlayer.id = i;
       if (i === io.id) {
-        console.log('you joined us, ' + i);
+        console.log('you joined everyone, ' + i);
         newPlayer.init(canvas, window);
       } else {
-        console.log('we were joined by ' + i);
+        console.log('you were joined by ' + i);
       }
 
       gameObjs.push(newPlayer);
