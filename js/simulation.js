@@ -9,17 +9,17 @@ function outsideCanvas (thing, canvas) {
 
 function initialize (canvas, ctx, window, io) {
   canvas.style.backgroundColor = colors.background;
-  canvas.width = 400;
-  canvas.height = 300;
+  canvas.width = 500;
+  canvas.height = 500;
 
   var gameObjs = [];
 
   io.on('left', function (message) {
     var thingsToRemove = gameObjs.filter(function (a) {
-      return a.id === message.who || a.owner.id === message.who;
+      return a.id === message.who || (a.owner && a.owner.id === message.who);
     });
     if (thingsToRemove.length > 0) {
-      var index = gameObjs.indexOf(leftArr[0]);
+      var index = gameObjs.indexOf(thingsToRemove[0]);
       gameObjs.splice(index, 1);
     }
   });
@@ -54,7 +54,8 @@ function initialize (canvas, ctx, window, io) {
       if (gameObjs[i].getCurrentActions) {
         actionsTemp = gameObjs[i].getCurrentActions();
       }
-
+      //need to io.emit the actions
+      //AND what we think actually happened
       gameObjs[i].update(dt, gameObjs, actionsTemp);
 
       if (outsideCanvas(gameObjs[i], canvas)) {
